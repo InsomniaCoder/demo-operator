@@ -19,6 +19,7 @@ package controllers
 import (
 	"context"
 
+	"gorm.io/gorm/logger"
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -37,6 +38,9 @@ type MyWatchlistReconciler struct {
 //+kubebuilder:rbac:groups=webapp.demo.my-watchlist.io,resources=mywatchlists/status,verbs=get;update;patch
 //+kubebuilder:rbac:groups=webapp.demo.my-watchlist.io,resources=mywatchlists/finalizers,verbs=update
 
+//+kubebuilder:rbac:groups=apps,resources=deployments,verbs=list;watch;get;patch;create;update
+//+kubebuilder:rbac:groups=core,resources=services,verbs=list;watch;get;patch;create;update
+
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
 // TODO(user): Modify the Reconcile function to compare the state specified by
@@ -47,10 +51,10 @@ type MyWatchlistReconciler struct {
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.8.3/pkg/reconcile
 func (r *MyWatchlistReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	_ = log.FromContext(ctx)
+	logger = log.FromContext(ctx)
 
 	// your logic here
-
+	logger.Info("Reconciling WatchList")
 	return ctrl.Result{}, nil
 }
 
