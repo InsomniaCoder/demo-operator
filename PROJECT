@@ -3,4 +3,14 @@ layout:
 - go.kubebuilder.io/v3
 projectName: demo-operator
 repo: github.com/InsomniaCoder/demo-operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: demo.my-watchlist.io
+  group: webapp
+  kind: MyWatchlist
+  path: github.com/InsomniaCoder/demo-operator/api/v1
+  version: v1
 version: "3"
