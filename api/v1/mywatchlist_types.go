@@ -28,14 +28,31 @@ type MyWatchlistSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of MyWatchlist. Edit mywatchlist_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	Frontend  FrontendSpec `json:"frontend"`
+	RedisName string       `json:"redisName,omitempty"`
+}
+
+// FrontendSpec speficies the frontend container spec
+type FrontendSpec struct {
+	// +optional
+	Resources corev1.ResourceRequirements `json:"resources"`
+
+	// +optional
+	// +kubebuilder:default=8080
+	// +kubebuilder:validation:Minimum=0
+	ServingPort int32 `json:"servingPort"`
+
+	// +optional
+	// +kubebuilder:default=1
+	// +kubebuilder:validation:Minimum=0
+	Replicas *int32 `json:"replicas,omitempty"`
 }
 
 // MyWatchlistStatus defines the observed state of MyWatchlist
 type MyWatchlistStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+	URL string `json:"url"`
 }
 
 //+kubebuilder:object:root=true
