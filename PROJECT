@@ -1,0 +1,6 @@
+domain: demo.my-watchlist.io
+layout:
+- go.kubebuilder.io/v3
+projectName: demo-operator
+repo: github.com/InsomniaCoder/demo-operator
+version: "3"
